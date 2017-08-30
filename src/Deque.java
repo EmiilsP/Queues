@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable<Item> {
     private Storage<Item> first;
@@ -27,7 +28,7 @@ public class Deque<Item> implements Iterable<Item> {
     public void addFirst(Item item) {   // add the item to the front
 
         if (item == null) {
-            throw new java.lang.IllegalArgumentException("Item is null");
+            throw new IllegalArgumentException("Item is null");
         }
         if (first == null && last == null) {
             Storage<Item> storage = new Storage<>(item, null, null);
@@ -43,7 +44,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     public void addLast(Item item) { // add the item to the end
         if (item == null) {
-            throw new java.lang.IllegalArgumentException("Item is null");
+            throw new IllegalArgumentException("Item is null");
         }
         if (first == null && last == null) {
             Storage<Item> storage = new Storage<Item>(item, null, null);
@@ -58,7 +59,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     public Item removeFirst() {  // remove and return the item from the front
         if (first == null && last == null) {
-            throw new java.util.NoSuchElementException();
+            throw new NoSuchElementException();
         }
         final Storage<Item> rf = first;
         first = rf.getNext();
@@ -72,7 +73,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     public Item removeLast() { // remove and return the item from the end
         if (first == null && last == null) {
-            throw new java.util.NoSuchElementException();
+            throw new NoSuchElementException();
         }
         final Storage<Item> rl = last;
         last = rl.getBefore();
@@ -100,7 +101,7 @@ public class Deque<Item> implements Iterable<Item> {
             @Override
             public Item next() {
                 if (current == null) {
-                    throw new java.util.NoSuchElementException();
+                    throw new NoSuchElementException();
                 }
                 final Item obj = current.getObject();
                 current = current.getNext();
@@ -109,7 +110,7 @@ public class Deque<Item> implements Iterable<Item> {
 
             @Override
             public void remove() {
-                throw new java.lang.UnsupportedOperationException();
+                throw new UnsupportedOperationException();
             }
 
 

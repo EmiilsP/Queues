@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import edu.princeton.cs.algs4.StdRandom;
 
@@ -23,7 +24,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public void enqueue(Item item) { // add the item
         if (item == null) {
-            throw new java.lang.NullPointerException();
+            throw new NullPointerException();
         }
         if (size + 1 > capacity) {
             capacity *= 2;
@@ -40,7 +41,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public Item dequeue() { // remove and return a random item
         if (isEmpty()) {
-            throw new java.util.NoSuchElementException();
+            throw new NoSuchElementException();
         }
         int random = StdRandom.uniform(size);
         Item lost = queue[random];
@@ -60,7 +61,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public Item sample() { // return (but do not remove) a random item
         if (isEmpty()) {
-            throw new java.util.NoSuchElementException();
+            throw new NoSuchElementException();
         }
         int random = StdRandom.uniform(size);
         return queue[random];
@@ -83,7 +84,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             @Override
             public Item next() {
                 if (!hasNext()) {
-                    throw new java.util.NoSuchElementException();
+                    throw new NoSuchElementException();
                 }
                 if (random == null) {
                     random = new int[arraySize];
@@ -101,20 +102,4 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             }
         };
     }
-
-    public static void main(String[] args) {
-        RandomizedQueue rq = new RandomizedQueue();
-
-        rq.enqueue(1);
-        rq.enqueue(2);
-        rq.enqueue(3);
-        rq.enqueue(4);
-        rq.enqueue(5);
-
-        Iterator it = rq.iterator();
-        while (it.hasNext()) {
-            System.out.println(it.next());
-        }
-
-    }   // unit testing (optional)
 }
